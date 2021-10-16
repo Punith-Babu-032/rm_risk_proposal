@@ -1,0 +1,68 @@
+<mvc:View controllerName="gmriskproposal.controller.Worklist"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:upload="sap.m.upload">
+
+    <Page title="Risk Proposal Request" showNavButton="true">
+        <content>
+            <Wizard id="proposeRiskWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" complete="wizardCompletedHandler" showNextButton="false" stepActivate="handleStepActivate">
+                <WizardStep id="proposeRiskWizardBasicWizard" validated="true" title="Propose a Risk">
+                    <VBox class="sapUiSmallMargin">
+                        <f:SimpleForm id="SimpleFormChange354" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+                            <f:content>
+                                <Label text="Name (Title)" design="Bold"/>
+                                <Input id="name" placeholder="Enter Risk Title" />
+                                <Label text="Description" design="Bold"/>
+                                <TextArea value="" placeholder="Enter Risk Description" rows="3" />
+                                <Label text="Division" design="Bold"/>
+                                <Input value="" placeholder="Enter Division" showValueHelp="true" valueHelpOnly="true"/>
+                                <Label text="Risk Tier" design="Bold"/>
+                                <Input value="" placeholder="Enter Risk Tier" showValueHelp="true" valueHelpOnly="true"/>
+                                <Label text="Risk Category" design="Bold"/>
+                                <Input value="" placeholder="Enter Risk Category" showValueHelp="true" valueHelpOnly="true"/>
+                                <Label text="Causes" design="Bold"/>
+                                <Input value="" />
+                                <Label text="Impacts" design="Bold"/>
+                                <Input value="" />
+                            </f:content>
+                        </f:SimpleForm>
+                    </VBox>
+                </WizardStep>
+                <WizardStep id="proposeRiskWizardAttachmentWizard" validated="true" title="Add Risk Attachments">
+                    <upload:UploadSet id="attachmentUploadSet" instantUpload="false" showIcons="true" uploadEnabled="true" terminationEnabled="true" fileTypes="txt,doc,png" maxFileNameLength="30" maxFileSize="200" mediaTypes="text/plain,application/msword,image/jpeg">
+                        <upload:toolbar>
+                            <OverflowToolbar>
+                                <Button id="uploadAttachmentAction" tooltip="Upload Selected" icon="sap-icon://upload-to-cloud" press="onUploadSelectedButton"/>
+                                <Button id="downloadAttachmentAction" tooltip="Download selected" icon="sap-icon://download-from-cloud" press="onDownloadSelectedButton"/>
+                            </OverflowToolbar>
+                        </upload:toolbar>
+                        <!-- <upload:items>
+                                        <upload:UploadSetItem fileName="{fileName}" mediaType="{mediaType}" url="{url}" thumbnailUrl="{thumbnailUrl}" attributes="{path: 'attributes', templateShareable: false}" markers="{path: 'markers', templateShareable: false}" statuses="{path: 'statuses', templateShareable: false}" uploadState="{uploadState}">
+                                            <upload:attributes>
+                                                <ObjectAttribute title="{title}" text="{text}" active="{active}"/>
+                                            </upload:attributes>
+                                            <upload:markers>
+                                                <ObjectMarker type="{type}" visibility="{visibility}"/>
+                                            </upload:markers>
+                                            <upload:statuses>
+                                                <ObjectStatus title="{title}" text="{text}" state="{state}" icon="{icon}" active="{active}"/>
+                                            </upload:statuses>
+                                        </upload:UploadSetItem>
+                                    </upload:items> -->
+                    </upload:UploadSet>
+                </WizardStep>
+            </Wizard>
+        </content>
+        <footer>
+            <OverflowToolbar>
+                <Button id="prevPageAction" text="Prev" press="goToPrevPage" />
+                <ToolbarSpacer/>
+                <Button id="nextPageAction" text="Next" press="goToNextPage" />
+            </OverflowToolbar>
+        </footer>
+    </Page>
+
+</mvc:View>
