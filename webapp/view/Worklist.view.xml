@@ -8,6 +8,9 @@
 
     <Page title="Risk Proposal Request" showNavButton="true">
         <content>
+            <ObjectHeader icon="../images/risk-proposal.png" iconDensityAware="false" imageShape="Circle" responsive="true"
+             title="DIS_DP07_DP_Budget Proposal" intro="Budget Proposal is not relaisitc: It's over the budget" class="sapUiResponsivePadding--header">
+            </ObjectHeader>
             <Wizard id="proposeRiskWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" complete="wizardCompletedHandler" showNextButton="false" stepActivate="handleStepActivate">
                 <WizardStep id="proposeRiskWizardBasicWizard" validated="true" title="Propose a Risk">
                     <VBox class="sapUiSmallMargin">
@@ -24,9 +27,9 @@
                                 <Label text="Risk Category" design="Bold"/>
                                 <Input value="" placeholder="Enter Risk Category" showValueHelp="true" valueHelpOnly="true"/>
                                 <Label text="Causes" design="Bold"/>
-                                <Input value="" />
+                                <Input value="" placeholder="Select Causes" showValueHelp="true" valueHelpOnly="true"/>
                                 <Label text="Impacts" design="Bold"/>
-                                <Input value="" />
+                                <Input value="" placeholder="Select Impacts" showValueHelp="true" valueHelpOnly="true"/>
                             </f:content>
                         </f:SimpleForm>
                     </VBox>
@@ -39,19 +42,6 @@
                                 <Button id="downloadAttachmentAction" tooltip="Download selected" icon="sap-icon://download-from-cloud" press="onDownloadSelectedButton"/>
                             </OverflowToolbar>
                         </upload:toolbar>
-                        <!-- <upload:items>
-                                        <upload:UploadSetItem fileName="{fileName}" mediaType="{mediaType}" url="{url}" thumbnailUrl="{thumbnailUrl}" attributes="{path: 'attributes', templateShareable: false}" markers="{path: 'markers', templateShareable: false}" statuses="{path: 'statuses', templateShareable: false}" uploadState="{uploadState}">
-                                            <upload:attributes>
-                                                <ObjectAttribute title="{title}" text="{text}" active="{active}"/>
-                                            </upload:attributes>
-                                            <upload:markers>
-                                                <ObjectMarker type="{type}" visibility="{visibility}"/>
-                                            </upload:markers>
-                                            <upload:statuses>
-                                                <ObjectStatus title="{title}" text="{text}" state="{state}" icon="{icon}" active="{active}"/>
-                                            </upload:statuses>
-                                        </upload:UploadSetItem>
-                                    </upload:items> -->
                     </upload:UploadSet>
                 </WizardStep>
             </Wizard>
