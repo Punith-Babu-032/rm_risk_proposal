@@ -26,7 +26,10 @@ sap.ui.define([
 			this._oErrorHandler = new ErrorHandler(this);
 
 			// set the device model
-			this.setModel(models.createDeviceModel(), "device");
+            this.setModel(models.createDeviceModel(), "device");
+            
+            // Set Application Component Data
+            this.setComponentData();
 
 			// create the views based on the url/hash
 			this.getRouter().initialize();
@@ -64,7 +67,14 @@ sap.ui.define([
 				}
 			}
 			return this._sContentDensityClass;
-		}
+        },
+        
+        setComponentData: function() {
+            var appConfigData = {
+                app: "RequestApp"
+            };
+            this.setModel(new sap.ui.model.json.JSONModel(appConfigData), "appConfigModel")
+        }
 
 	});
 

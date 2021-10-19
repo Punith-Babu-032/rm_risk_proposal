@@ -8,32 +8,28 @@
 
     <Page title="Risk Proposal Request" showNavButton="true">
         <content>
-            <ObjectHeader visible="{= ${appConfigModel>/app} === 'RequestApp'}" icon="sap-icon://action-settings" iconDensityAware="false" imageShape="Circle" responsive="true" title="DIS_DP07_DP_Budget Proposal" intro="Budget Proposal is not relaisitc: It's over the budget" class="sapUiResponsivePadding--header" />
+            <ObjectHeader visible="false" icon="../images/risk-proposal.png" iconDensityAware="false" imageShape="Circle" responsive="true"
+             title="DIS_DP07_DP_Budget Proposal" intro="Budget Proposal is not relaisitc: It's over the budget" class="sapUiResponsivePadding--header">
+            </ObjectHeader>
             <Wizard id="proposeRiskWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" complete="wizardCompletedHandler" showNextButton="false" stepActivate="handleStepActivate">
                 <WizardStep id="proposeRiskWizardBasicWizard" validated="true" title="Propose a Risk">
                     <VBox class="sapUiSmallMargin">
                         <f:SimpleForm id="SimpleFormChange354" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
                             <f:content>
                                 <Label text="Name (Title)" design="Bold"/>
-                                <Input id="name" placeholder="Enter Risk Title" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/>
-                                <Label text="Description" design="Bold" />
-                                <TextArea value="" placeholder="Enter Risk Description" rows="3" editable="{= ${appConfigModel>/app} === 'RequestApp'}" />
+                                <Input id="name" placeholder="Enter Risk Title" />
+                                <Label text="Description" design="Bold"/>
+                                <TextArea value="" placeholder="Enter Risk Description" rows="3" />
                                 <Label text="Division" design="Bold"/>
-                                <Input value="" placeholder="Enter Division" showValueHelp="true" valueHelpOnly="true" />
+                                <Input value="" placeholder="Enter Division" showValueHelp="true" valueHelpOnly="true"/>
                                 <Label text="Risk Tier" design="Bold"/>
-                                <Input value="" placeholder="Enter Risk Tier" showValueHelp="true" valueHelpOnly="true" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/>
+                                <Input value="" placeholder="Enter Risk Tier" showValueHelp="true" valueHelpOnly="true"/>
                                 <Label text="Risk Category" design="Bold"/>
-                                <Input value="" placeholder="Enter Risk Category" showValueHelp="true" valueHelpOnly="true" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/>
+                                <Input value="" placeholder="Enter Risk Category" showValueHelp="true" valueHelpOnly="true"/>
                                 <Label text="Causes" design="Bold"/>
-                                <Input value="" placeholder="Select Causes" showValueHelp="true" valueHelpOnly="true" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/>
-                                <TextArea value="" placeholder="Enter Causes Description" rows="3" />
+                                <Input value="" placeholder="Select Causes" showValueHelp="true" valueHelpOnly="true"/>
                                 <Label text="Impacts" design="Bold"/>
-                                <Input value="" placeholder="Select Impacts" showValueHelp="true" valueHelpOnly="true" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/>
-                                <TextArea value="" placeholder="Enter Impacts Description" rows="3" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/>
-                                <Label visible="{= ${appConfigModel>/app} === 'ApproveApp'}" text="Approved By" design="Bold"/>
-                                <Input visible="{= ${appConfigModel>/app} === 'ApproveApp'}" value="Risk Champion" editable="false"/>
-                                <Label visible="{= ${appConfigModel>/app} === 'ApproveApp'}" text="Approver Notes" design="Bold"/>
-                                <TextArea visible="{= ${appConfigModel>/app} === 'ApproveApp'}" value="" placeholder="Enter Approver Notes" rows="3" />
+                                <Input value="" placeholder="Select Impacts" showValueHelp="true" valueHelpOnly="true"/>
                             </f:content>
                         </f:SimpleForm>
                     </VBox>
@@ -55,10 +51,8 @@
                 <Button id="prevPageAction" text="Prev" type="Emphasized" press="goToPrevPage" />
                 <ToolbarSpacer/>
                 <Button id="nextPageAction" text="Next" type="Emphasized" press="goToNextPage" />
-                <Button id="submitPageAction" visible="{= ${appConfigModel>/app} === 'RequestApp'}" text="Submit" type="Accept" press="handleSubmitRiskProposal" />
-                <Button id="approvePageAction" visible="{= ${appConfigModel>/app} === 'ApproveApp'}" text="Approve" type="Accept" press="handleApproveRiskProposal" />
-                <Button id="rejectPageAction" visible="{= ${appConfigModel>/app} === 'ApproveApp'}" text="Reject" type="Reject" press="handleRejectRiskProposal" />
             </OverflowToolbar>
         </footer>
     </Page>
+
 </mvc:View>
