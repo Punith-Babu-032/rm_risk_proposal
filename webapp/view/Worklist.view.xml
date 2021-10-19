@@ -8,9 +8,9 @@
 
     <Page title="Risk Proposal Request" showNavButton="true">
         <content>
-            <Wizard id="proposeRiskWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" complete="wizardCompletedHandler" showNextButton="false" stepActivate="handleStepActivate">
+            <Wizard id="proposeRiskWizard" complete="wizardCompletedHandler" showNextButton="false" stepActivate="handleStepActivate">
                 <WizardStep id="proposeRiskWizardBasicWizard" validated="true" title="Propose a Risk">
-                    <VBox class="sapUiSmallMargin">
+                    <!-- <VBox class="sapUiSmallMargin"> -->
                         <f:SimpleForm id="SimpleFormChange354" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
                             <f:content>
                                 <Label text="Name (Title)" design="Bold"/>
@@ -29,7 +29,13 @@
                                 <Input value="" />
                             </f:content>
                         </f:SimpleForm>
-                    </VBox>
+                    <!-- </VBox> -->
+                </WizardStep>
+                <WizardStep id="causes" validated="true" title="Causes">
+                    
+                </WizardStep>
+                <WizardStep id="impacts" validated="true" title="Impacts">
+                   
                 </WizardStep>
                 <WizardStep id="proposeRiskWizardAttachmentWizard" validated="true" title="Add Risk Attachments">
                     <upload:UploadSet id="attachmentUploadSet" instantUpload="false" showIcons="true" uploadEnabled="true" terminationEnabled="true" fileTypes="txt,doc,png" maxFileNameLength="30" maxFileSize="200" mediaTypes="text/plain,application/msword,image/jpeg">
