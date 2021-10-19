@@ -8,7 +8,7 @@
 
     <Page title="Risk Proposal Request" showNavButton="true">
         <content>
-            <ObjectHeader visible="{= ${appConfigModel>/app} === 'RequestApp'}" icon="sap-icon://action-settings" iconDensityAware="false" imageShape="Circle" responsive="true" title="DIS_DP07_DP_Budget Proposal" intro="Budget Proposal is not relaisitc: It's over the budget" class="sapUiResponsivePadding--header" />
+            <ObjectHeader visible="{= ${appConfigModel>/app} === 'ApproveApp'}" icon="sap-icon://action-settings" iconDensityAware="false" imageShape="Circle" responsive="true" title="DIS_DP07_DP_Budget Proposal" intro="Budget Proposal is not relaisitc: It's over the budget" class="sapUiResponsivePadding--header" />
             <Wizard id="proposeRiskWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" complete="wizardCompletedHandler" showNextButton="false" stepActivate="handleStepActivate">
                 <WizardStep id="proposeRiskWizardBasicWizard" validated="true" title="Propose a Risk">
                     <VBox class="sapUiSmallMargin">
