@@ -40,10 +40,26 @@ sap.ui.define([
             });
             this.setModel(oViewModel, "worklistView");
 
+            // this.delegateWizrd = {
+            //     "onAfterRendering": function () {
+            //         this.byId("proposeRiskWizard").goToStep(this.byId("proposeRiskBasicData"));
+            //     }.bind(this)
+            // };
+
+            // this.byId("proposeRiskWizard").addEventDelegate(this.delegateWizrd, this)
+            // // this.byId("proposeRiskWizard").attachEventOnce("", function () {
+            // //     this.byId("proposeRiskWizard").goToStep(this.byId("proposeRiskBasicData"));
+            // // }.bind(this));
+
+
             // Make sure, busy indication is showing immediately so there is no
             // break after the busy indication for loading the view's meta data is
             // ended (see promise 'oWhenMetadataIsLoaded' in AppController)
 
+        },
+
+        onAfterRendering: function () {
+            this.byId("proposeRiskWizard").goToStep(this.byId("proposeRiskBasicData"), this);
         },
 
         /* =========================================================== */
@@ -73,7 +89,7 @@ sap.ui.define([
             this.goToPrevPage();
         },
 
-        handleApproveRiskProposal: function() {
+        handleApproveRiskProposal: function () {
             sap.m.MessageBox.success("Risk Proposal has been Approved and risk has been created Successfully");
             this.goToPrevPage();
         },
@@ -182,6 +198,5 @@ sap.ui.define([
                 oViewModel.setProperty("/tableNoDataText", this.getResourceBundle().getText("worklistNoDataWithSearchText"));
             }
         }
-
     });
 });
