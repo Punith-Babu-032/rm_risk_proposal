@@ -32,10 +32,34 @@
                     <!-- </VBox> -->
                 </WizardStep>
                 <WizardStep id="causes" validated="true" title="Causes">
-                    
+                    <List items="{saveModel>/causes}" mode="Delete">
+                        <headerToolbar>
+			              <OverflowToolbar>
+			            	<ToolbarSpacer />
+			            	<Button
+		            			icon="sap-icon://add"
+			            		press="handleAddCauses" />
+		                  </OverflowToolbar>
+		                </headerToolbar>
+                        <items>
+                        	<StandardListItem title="{saveModel>causeText}"/>
+                        </items>
+                    </List>
                 </WizardStep>
                 <WizardStep id="impacts" validated="true" title="Impacts">
-                   
+                    <List items="{saveModel>/impacts}" mode="Delete">
+                        <headerToolbar>
+			              <OverflowToolbar>
+			            	<ToolbarSpacer />
+			            	<Button
+		            			icon="sap-icon://add"
+			            		press="handleAddImpacts" />
+		                  </OverflowToolbar>
+		                </headerToolbar>
+                        <items>
+                        	<StandardListItem title="{saveModel>impactText}"/>
+                        </items>
+                    </List>
                 </WizardStep>
                 <WizardStep id="proposeRiskWizardAttachmentWizard" validated="true" title="Add Risk Attachments">
                     <upload:UploadSet id="attachmentUploadSet" instantUpload="false" showIcons="true" uploadEnabled="true" terminationEnabled="true" fileTypes="txt,doc,png" maxFileNameLength="30" maxFileSize="200" mediaTypes="text/plain,application/msword,image/jpeg">
