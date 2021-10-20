@@ -8,31 +8,36 @@
 
     <Page title="Risk Proposal Request" showNavButton="true">
         <content>
-            <Wizard id="proposeRiskWizard" complete="wizardCompletedHandler" showNextButton="false" stepActivate="handleStepActivate">
-                <WizardStep id="proposeRiskWizardBasicWizard" validated="true" title="Propose a Risk">
-                    <!-- <VBox class="sapUiSmallMargin"> -->
-                        <f:SimpleForm id="SimpleFormChange354" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
-                            <f:content>
-                                <Label text="Name (Title)" design="Bold"/>
-                                <Input id="name" placeholder="Enter Risk Title" />
-                                <Label text="Description" design="Bold"/>
-                                <TextArea value="" placeholder="Enter Risk Description" rows="3" />
-                                <Label text="Division" design="Bold"/>
-                                <Input value="" placeholder="Enter Division" showValueHelp="true" valueHelpOnly="true"/>
-                                <Label text="Risk Tier" design="Bold"/>
-                                <Input value="" placeholder="Enter Risk Tier" showValueHelp="true" valueHelpOnly="true"/>
-                                <Label text="Risk Category" design="Bold"/>
-                                <Input value="" placeholder="Enter Risk Category" showValueHelp="true" valueHelpOnly="true"/>
-                                <Label text="Causes" design="Bold"/>
-                                <Input value="" />
-                                <Label text="Impacts" design="Bold"/>
-                                <Input value="" />
-                            </f:content>
-                        </f:SimpleForm>
-                    <!-- </VBox> -->
+            <ObjectHeader visible="{= ${appConfigModel>/app} === 'ApproveApp'}" icon="sap-icon://action-settings" iconDensityAware="false" imageShape="Circle" responsive="true" title="DIS_DP07_DP_Budget Proposal" intro="Budget Proposal is not relaisitc: It's over the budget" class="sapUiResponsivePadding--header" />
+            <Wizard id="proposeRiskWizard" currentStep="PricingStep" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" showNextButton="false">
+                <WizardStep id="proposeRiskBasicData" title="Propose a Risk">
+                    <f:SimpleForm id="SimpleFormChange354" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+                        <f:content>
+                            <Label text="Name (Title)" design="Bold"/>
+                            <Input id="name" placeholder="Enter Risk Title" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/>
+                            <Label text="Description" design="Bold" />
+                            <TextArea value="" placeholder="Enter Risk Description" rows="3" editable="{= ${appConfigModel>/app} === 'RequestApp'}" />
+                            <Label text="Division" design="Bold"/>
+                            <Input value="" placeholder="Enter Division" showValueHelp="true" valueHelpOnly="true" />
+                            <Label text="Risk Tier" design="Bold"/>
+                            <Input value="" placeholder="Enter Risk Tier" showValueHelp="true" valueHelpOnly="true" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/>
+                            <Label text="Risk Category" design="Bold"/>
+                            <Input value="" placeholder="Enter Risk Category" showValueHelp="true" valueHelpOnly="true" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/>
+                            <Label text="Causes" design="Bold"/>
+                            <Input value="" placeholder="Select Causes" showValueHelp="true" valueHelpOnly="true" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/>
+                            <TextArea value="" placeholder="Enter Causes Description" rows="3" />
+                            <Label text="Impacts" design="Bold"/>
+                            <Input value="" placeholder="Select Impacts" showValueHelp="true" valueHelpOnly="true" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/>
+                            <TextArea value="" placeholder="Enter Impacts Description" rows="3" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/>
+                            <Label visible="{= ${appConfigModel>/app} === 'ApproveApp'}" text="Approved By" design="Bold"/>
+                            <Input visible="{= ${appConfigModel>/app} === 'ApproveApp'}" value="Risk Champion" editable="false"/>
+                            <Label visible="{= ${appConfigModel>/app} === 'ApproveApp'}" text="Approver Notes" design="Bold"/>
+                            <TextArea visible="{= ${appConfigModel>/app} === 'ApproveApp'}" value="" placeholder="Enter Approver Notes" rows="3" />
+                        </f:content>
+                    </f:SimpleForm>
                 </WizardStep>
                 <WizardStep id="causes" validated="true" title="Causes">
-                    <List items="{saveModel>/causes}" mode="Delete">
+                    <List items="{saveModel>/causes}" mode="Delete" delete="handleCauseDelete">
                         <headerToolbar>
 			              <OverflowToolbar>
 			            	<ToolbarSpacer />
@@ -47,7 +52,7 @@
                     </List>
                 </WizardStep>
                 <WizardStep id="impacts" validated="true" title="Impacts">
-                    <List items="{saveModel>/impacts}" mode="Delete">
+                    <List items="{saveModel>/impacts}" mode="Delete" delete="handleImpactDelete">
                         <headerToolbar>
 			              <OverflowToolbar>
 			            	<ToolbarSpacer />
@@ -61,7 +66,8 @@
                         </items>
                     </List>
                 </WizardStep>
-                <WizardStep id="proposeRiskWizardAttachmentWizard" validated="true" title="Add Risk Attachments">
+                <!--  -->
+                <WizardStep id="PricingStep" title="Add Risk Attachments">
                     <upload:UploadSet id="attachmentUploadSet" instantUpload="false" showIcons="true" uploadEnabled="true" terminationEnabled="true" fileTypes="txt,doc,png" maxFileNameLength="30" maxFileSize="200" mediaTypes="text/plain,application/msword,image/jpeg">
                         <upload:toolbar>
                             <OverflowToolbar>
@@ -69,30 +75,21 @@
                                 <Button id="downloadAttachmentAction" tooltip="Download selected" icon="sap-icon://download-from-cloud" press="onDownloadSelectedButton"/>
                             </OverflowToolbar>
                         </upload:toolbar>
-                        <!-- <upload:items>
-                                        <upload:UploadSetItem fileName="{fileName}" mediaType="{mediaType}" url="{url}" thumbnailUrl="{thumbnailUrl}" attributes="{path: 'attributes', templateShareable: false}" markers="{path: 'markers', templateShareable: false}" statuses="{path: 'statuses', templateShareable: false}" uploadState="{uploadState}">
-                                            <upload:attributes>
-                                                <ObjectAttribute title="{title}" text="{text}" active="{active}"/>
-                                            </upload:attributes>
-                                            <upload:markers>
-                                                <ObjectMarker type="{type}" visibility="{visibility}"/>
-                                            </upload:markers>
-                                            <upload:statuses>
-                                                <ObjectStatus title="{title}" text="{text}" state="{state}" icon="{icon}" active="{active}"/>
-                                            </upload:statuses>
-                                        </upload:UploadSetItem>
-                                    </upload:items> -->
                     </upload:UploadSet>
                 </WizardStep>
             </Wizard>
         </content>
         <footer>
             <OverflowToolbar>
-                <Button id="prevPageAction" text="Prev" press="goToPrevPage" />
+                <!-- <Button id="prevPageAction" text="Prev" type="Emphasized" press="goToPrevPage" /> -->
                 <ToolbarSpacer/>
-                <Button id="nextPageAction" text="Next" press="goToNextPage" />
+                <!-- <Button id="nextPageAction" text="Next" type="Emphasized" press="goToNextPage" /> -->
+                <Button id="submitPageAction" visible="{= ${appConfigModel>/app} === 'RequestApp'}" text="Submit" type="Accept" press="handleSubmitRiskProposal" />
+                <Button id="approvePageAction" visible="{= ${appConfigModel>/app} === 'ApproveApp'}" text="Approve" type="Accept" press="handleApproveRiskProposal" />
+                <Button id="rejectPageAction" visible="{= ${appConfigModel>/app} === 'ApproveApp'}" text="Reject" type="Reject" press="handleRejectRiskProposal" />
             </OverflowToolbar>
         </footer>
     </Page>
-
 </mvc:View>
+
+

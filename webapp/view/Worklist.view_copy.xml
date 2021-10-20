@@ -1,0 +1,58 @@
+<mvc:View controllerName="gmriskproposal.controller.Worklist"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:upload="sap.m.upload">
+
+    <Page title="Risk Proposal Request" showNavButton="true">
+        <content>
+            <ObjectHeader visible="false" icon="../images/risk-proposal.png" iconDensityAware="false" imageShape="Circle" responsive="true"
+             title="DIS_DP07_DP_Budget Proposal" intro="Budget Proposal is not relaisitc: It's over the budget" class="sapUiResponsivePadding--header">
+            </ObjectHeader>
+            <Wizard id="proposeRiskWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" complete="wizardCompletedHandler" showNextButton="false" stepActivate="handleStepActivate">
+                <WizardStep id="proposeRiskWizardBasicWizard" validated="true" title="Propose a Risk">
+                    <VBox class="sapUiSmallMargin">
+                        <f:SimpleForm id="SimpleFormChange354" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+                            <f:content>
+                                <Label text="Name (Title)" design="Bold"/>
+                                <Input id="name" placeholder="Enter Risk Title" />
+                                <Label text="Description" design="Bold"/>
+                                <TextArea value="" placeholder="Enter Risk Description" rows="3" />
+                                <Label text="Division" design="Bold"/>
+                                <Input value="" placeholder="Enter Division" showValueHelp="true" valueHelpOnly="true"/>
+                                <Label text="Risk Tier" design="Bold"/>
+                                <Input value="" placeholder="Enter Risk Tier" showValueHelp="true" valueHelpOnly="true"/>
+                                <Label text="Risk Category" design="Bold"/>
+                                <Input value="" placeholder="Enter Risk Category" showValueHelp="true" valueHelpOnly="true"/>
+                                <Label text="Causes" design="Bold"/>
+                                <Input value="" placeholder="Select Causes" showValueHelp="true" valueHelpOnly="true"/>
+                                <Label text="Impacts" design="Bold"/>
+                                <Input value="" placeholder="Select Impacts" showValueHelp="true" valueHelpOnly="true"/>
+                            </f:content>
+                        </f:SimpleForm>
+                    </VBox>
+                </WizardStep>
+                <WizardStep id="proposeRiskWizardAttachmentWizard" validated="true" title="Add Risk Attachments">
+                    <upload:UploadSet id="attachmentUploadSet" instantUpload="false" showIcons="true" uploadEnabled="true" terminationEnabled="true" fileTypes="txt,doc,png" maxFileNameLength="30" maxFileSize="200" mediaTypes="text/plain,application/msword,image/jpeg">
+                        <upload:toolbar>
+                            <OverflowToolbar>
+                                <Button id="uploadAttachmentAction" tooltip="Upload Selected" icon="sap-icon://upload-to-cloud" press="onUploadSelectedButton"/>
+                                <Button id="downloadAttachmentAction" tooltip="Download selected" icon="sap-icon://download-from-cloud" press="onDownloadSelectedButton"/>
+                            </OverflowToolbar>
+                        </upload:toolbar>
+                    </upload:UploadSet>
+                </WizardStep>
+            </Wizard>
+        </content>
+        <footer>
+            <OverflowToolbar>
+                <Button id="prevPageAction" text="Prev" type="Emphasized" press="goToPrevPage" />
+                <ToolbarSpacer/>
+                <Button id="nextPageAction" text="Next" type="Emphasized" press="goToNextPage" />
+            </OverflowToolbar>
+        </footer>
+    </Page>
+
+</mvc:View>

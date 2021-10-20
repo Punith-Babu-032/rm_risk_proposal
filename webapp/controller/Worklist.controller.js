@@ -64,6 +64,26 @@ sap.ui.define([
                     causeText: "Cause 2"
                 }]
             }), "dropdowns");
+            // this.delegateWizrd = {
+            //     "onAfterRendering": function () {
+            //         this.byId("proposeRiskWizard").goToStep(this.byId("proposeRiskBasicData"));
+            //     }.bind(this)
+            // };
+
+            // this.byId("proposeRiskWizard").addEventDelegate(this.delegateWizrd, this)
+            // // this.byId("proposeRiskWizard").attachEventOnce("", function () {
+            // //     this.byId("proposeRiskWizard").goToStep(this.byId("proposeRiskBasicData"));
+            // // }.bind(this));
+
+
+            // Make sure, busy indication is showing immediately so there is no
+            // break after the busy indication for loading the view's meta data is
+            // ended (see promise 'oWhenMetadataIsLoaded' in AppController)
+
+        },
+
+        onAfterRendering: function () {
+            this.byId("proposeRiskWizard").goToStep(this.byId("proposeRiskBasicData"), this);
         },
 
         /* =========================================================== */
@@ -73,6 +93,7 @@ sap.ui.define([
         goToPrevPage: function () {
             this.byId("proposeRiskWizard").previousStep();
             this.byId("prevPageAction").setVisible(false);
+            this.byId("submitPageAction").setVisible(false);
             this.byId("nextPageAction").setVisible(true);
         },
 
@@ -80,13 +101,22 @@ sap.ui.define([
             this.byId("proposeRiskWizard").nextStep();
             this.byId("nextPageAction").setVisible(false);
             this.byId("prevPageAction").setVisible(true);
+            this.byId("submitPageAction").setVisible(true);
         },
 
         handleStepActivate: function (oEvent) {
 
         },
 
+        handleSubmitRiskProposal: function () {
+            sap.m.MessageBox.success("Your Risk Proposal has been submitted successfully");
+            this.goToPrevPage();
+        },
 
+        handleApproveRiskProposal: function () {
+            sap.m.MessageBox.success("Risk Proposal has been Approved and risk has been created Successfully");
+            this.goToPrevPage();
+        },
 
 		/**
 		 * Triggered by the table's 'updateFinished' event: after new table
@@ -201,7 +231,7 @@ sap.ui.define([
                         var mObject = aContexts[0].getObject();
                         var oModel = this.getView().getModel("saveModel");
                         var aData = oModel.getData();
-                        aData.causes.push({ "impactText": mObject.impactText });
+                        aData.impacts.push({ "impactText": mObject.impactText });
                         oModel.setData(aData);
                         oModel.refresh();
                     }.bind(this)
@@ -209,12 +239,28 @@ sap.ui.define([
                 this.impactsPopup.bindAggregation("items", {
                     path: "dropdowns>/impacts",
                     template: new sap.m.StandardListItem({
-                        title: "{dropdowns>impactText}"
+                        title: "{dropdowns>impactText}",
                     })
                 });
                 this.getView().addDependent(this.impactsPopup);
             }
             this.impactsPopup.open();
+        },
+
+        handleCauseDelete: function (oEvent) {
+            var id = oEvent.getParameter("listItem").getBindingContext("saveModel").getPath().split("/");
+            var oModel = this.getView().getModel("saveModel");
+            var aData = oModel.getData();
+            aData.causes.splice(id,1);
+            oModel.setData(aData);
+        },
+
+        handleImpactDelete: function (oEvent) {
+            var id = oEvent.getParameter("listItem").getBindingContext("saveModel").getPath().split("/");
+            var oModel = this.getView().getModel("saveModel");
+            var aData = oModel.getData();
+            aData.impacts.splice(id,1);
+            oModel.setData(aData);
         },
 		/**
 		 * Shows the selected item on the object page
@@ -242,6 +288,5 @@ sap.ui.define([
                 oViewModel.setProperty("/tableNoDataText", this.getResourceBundle().getText("worklistNoDataWithSearchText"));
             }
         }
-
     });
 });
