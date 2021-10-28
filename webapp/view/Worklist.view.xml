@@ -1,12 +1,13 @@
 <mvc:View controllerName="gmriskproposal.controller.Worklist"
     xmlns="sap.m"
+    xmlns:core="sap.ui.core"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:semantic="sap.f.semantic"
     xmlns:l="sap.ui.layout"
     xmlns:f="sap.ui.layout.form"
     xmlns:upload="sap.m.upload">
 
-    <Page title="Risk Proposal Request" showNavButton="true">
+    <Page title="Risk Proposal Request" showNavButton="true" showHeader="false">
         <content>
             <ObjectHeader visible="{= ${appConfigModel>/app} === 'ApproveApp'}" icon="sap-icon://action-settings" iconDensityAware="false" imageShape="Circle" responsive="true" title="DIS_DP07_DP_Budget Proposal" intro="Budget Proposal is not relaisitc: It's over the budget" class="sapUiResponsivePadding--header" />
             <Wizard id="proposeRiskWizard" currentStep="PricingStep" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" showNextButton="false">
@@ -18,17 +19,38 @@
                             <Label text="Description" design="Bold" />
                             <TextArea value="" placeholder="Enter Risk Description" rows="3" editable="{= ${appConfigModel>/app} === 'RequestApp'}" />
                             <Label text="Division" design="Bold"/>
-                            <Input value="" placeholder="Enter Division" showValueHelp="true" valueHelpOnly="true" />
+                            <!-- <Input value="" placeholder="Enter Division" showValueHelp="true" valueHelpOnly="true" /> -->
+                            <Select>
+                                <items>
+                                    <core:ListItem key="1" text="Unit Testing Organization" />
+                                    <core:ListItem key="2" text="Quality Analysis Organization" />
+                                </items>
+                            </Select>
                             <Label text="Risk Tier" design="Bold"/>
-                            <Input value="" placeholder="Enter Risk Tier" showValueHelp="true" valueHelpOnly="true" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/>
+                            <Select>
+                                <items>
+                                    <core:ListItem key="1" text="Tier 1 - Divisional Risk" />
+                                    <core:ListItem key="2" text="Tier 2 - Divisional Risk" />
+                                    <core:ListItem key="3" text="Tier 3 - Divisional Risk" />
+                                </items>
+                            </Select>
+
+                            <!-- <Input value="" placeholder="Enter Risk Tier" showValueHelp="true" valueHelpOnly="true" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/> -->
                             <Label text="Risk Category" design="Bold"/>
-                            <Input value="" placeholder="Enter Risk Category" showValueHelp="true" valueHelpOnly="true" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/>
-                            <Label text="Causes" design="Bold"/>
+                            <Select>
+                                <items>
+                                    <core:ListItem key="1" text="Risk Category 1 - Planning" />
+                                    <core:ListItem key="2" text="Risk Category 2 - Forecasting" />
+                                    <core:ListItem key="3" text="Risk Category 3 - Report" />
+                                </items>
+                            </Select>
+                            <!-- <Input value="" placeholder="Enter Risk Category" showValueHelp="true" valueHelpOnly="true" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/> -->
+                            <!-- <Label text="Causes" design="Bold"/>
                             <Input value="" placeholder="Select Causes" showValueHelp="true" valueHelpOnly="true" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/>
                             <TextArea value="" placeholder="Enter Causes Description" rows="3" />
                             <Label text="Impacts" design="Bold"/>
                             <Input value="" placeholder="Select Impacts" showValueHelp="true" valueHelpOnly="true" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/>
-                            <TextArea value="" placeholder="Enter Impacts Description" rows="3" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/>
+                            <TextArea value="" placeholder="Enter Impacts Description" rows="3" editable="{= ${appConfigModel>/app} === 'RequestApp'}"/> -->
                             <Label visible="{= ${appConfigModel>/app} === 'ApproveApp'}" text="Approved By" design="Bold"/>
                             <Input visible="{= ${appConfigModel>/app} === 'ApproveApp'}" value="Risk Champion" editable="false"/>
                             <Label visible="{= ${appConfigModel>/app} === 'ApproveApp'}" text="Approver Notes" design="Bold"/>
@@ -39,34 +61,29 @@
                 <WizardStep id="causes" validated="true" title="Causes">
                     <List items="{saveModel>/causes}" mode="Delete" delete="handleCauseDelete">
                         <headerToolbar>
-			              <OverflowToolbar>
-			            	<ToolbarSpacer />
-			            	<Button
-		            			icon="sap-icon://add"
-			            		press="handleAddCauses" />
-		                  </OverflowToolbar>
-		                </headerToolbar>
+                            <OverflowToolbar>
+                                <ToolbarSpacer />
+                                <Button icon="sap-icon://add" press="handleAddCauses" />
+                            </OverflowToolbar>
+                        </headerToolbar>
                         <items>
-                        	<StandardListItem title="{saveModel>causeText}"/>
+                            <StandardListItem title="{saveModel>causeText}"/>
                         </items>
                     </List>
                 </WizardStep>
                 <WizardStep id="impacts" validated="true" title="Impacts">
                     <List items="{saveModel>/impacts}" mode="Delete" delete="handleImpactDelete">
                         <headerToolbar>
-			              <OverflowToolbar>
-			            	<ToolbarSpacer />
-			            	<Button
-		            			icon="sap-icon://add"
-			            		press="handleAddImpacts" />
-		                  </OverflowToolbar>
-		                </headerToolbar>
+                            <OverflowToolbar>
+                                <ToolbarSpacer />
+                                <Button icon="sap-icon://add" press="handleAddImpacts" />
+                            </OverflowToolbar>
+                        </headerToolbar>
                         <items>
-                        	<StandardListItem title="{saveModel>impactText}"/>
+                            <StandardListItem title="{saveModel>impactText}"/>
                         </items>
                     </List>
                 </WizardStep>
-                <!--  -->
                 <WizardStep id="PricingStep" title="Add Risk Attachments">
                     <upload:UploadSet id="attachmentUploadSet" instantUpload="false" showIcons="true" uploadEnabled="true" terminationEnabled="true" fileTypes="txt,doc,png" maxFileNameLength="30" maxFileSize="200" mediaTypes="text/plain,application/msword,image/jpeg">
                         <upload:toolbar>

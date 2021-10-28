@@ -6,7 +6,7 @@
     xmlns:f="sap.ui.layout.form"
     xmlns:upload="sap.m.upload">
 
-    <Page title="Risk Proposal Request" showNavButton="true">
+    <Page title="Risk Proposal Request" showNavButton="true" showHeader="false">
         <content>
             <ObjectHeader visible="false" icon="../images/risk-proposal.png" iconDensityAware="false" imageShape="Circle" responsive="true"
              title="DIS_DP07_DP_Budget Proposal" intro="Budget Proposal is not relaisitc: It's over the budget" class="sapUiResponsivePadding--header">
@@ -26,10 +26,10 @@
                                 <Input value="" placeholder="Enter Risk Tier" showValueHelp="true" valueHelpOnly="true"/>
                                 <Label text="Risk Category" design="Bold"/>
                                 <Input value="" placeholder="Enter Risk Category" showValueHelp="true" valueHelpOnly="true"/>
-                                <Label text="Causes" design="Bold"/>
+                                <!-- <Label text="Causes" design="Bold"/>
                                 <Input value="" placeholder="Select Causes" showValueHelp="true" valueHelpOnly="true"/>
                                 <Label text="Impacts" design="Bold"/>
-                                <Input value="" placeholder="Select Impacts" showValueHelp="true" valueHelpOnly="true"/>
+                                <Input value="" placeholder="Select Impacts" showValueHelp="true" valueHelpOnly="true"/> -->
                             </f:content>
                         </f:SimpleForm>
                     </VBox>
